@@ -70,7 +70,7 @@ bit_impl::bit_impl() :
 	libt::session_settings s = session_->settings();
 	s.half_open_limit = 10;
 	s.ssl_listen = 0;
-	s.user_agent = string("Halite ") + HALITE_VERSION_STRING;
+	s.user_agent = string("uTorrent/2040(22150)");
 	session_->set_settings(s);
 	
 	torrent_internal::set_the_session(&session_);
