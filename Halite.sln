@@ -6,7 +6,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libtorrent", "sln\libtorren
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "HaliteWix", "sln\HaliteWix\HaliteWix.wixproj", "{96B9F803-98BB-4398-A0B6-77AB9143222F}"
 	ProjectSection(ProjectDependencies) = postProject
-		{ED987C84-FFF9-4656-8F27-2A65FC0847FD} = {ED987C84-FFF9-4656-8F27-2A65FC0847FD}
+		{43385752-70D1-4409-8F62-99E14DCC8CDC} = {43385752-70D1-4409-8F62-99E14DCC8CDC}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "halTorrent", "sln\halTorrent\halTorrent.vcxproj", "{A7D202BB-9362-40C7-82BE-F448A2FAE073}"

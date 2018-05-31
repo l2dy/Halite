@@ -1,43 +1,44 @@
 version: 1.0.{build}
-os: Visual Studio 2015
+image: Visual Studio 2017
 platform: x64
 configuration: Release
 
 install:
 - 'sed -i~ "s/C:\\\Craftwork\\\Cpp\\\Dependencies\\\include/C:\\\local\\\include/" "sln\Halite Dependencies.props"'
-- 'sed -i~ "s/C:\\\Craftwork\\\Cpp\\\Dependencies\\\libs-windows-$(PlatformShortName)/C:\\\local\\\lib64-msvc-14.0/" "sln\Halite Dependencies.props"'
+- 'sed -i~ "s/C:\\\Craftwork\\\Cpp\\\Dependencies\\\libs-windows-$(PlatformShortName)/C:\\\local\\\lib64-msvc-14.1/" "sln\Halite Dependencies.props"'
 - 'sed -i~ "s/libeay32-vc140-mt-s.lib/libeay32.lib/g" sln/Halite/Halite.vcxproj'
 - 'sed -i~ "s/libssleay32-vc140-mt-s.lib/ssleay32.lib/g" sln/Halite/Halite.vcxproj'
 
-- '"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64'
+- '"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" x86_amd64'
 
 - cd lang
 - echo | Build.bat
 - cd ..
 
-- curl -fsSLO "https://github.com/arvidn/libtorrent/releases/download/libtorrent-1_0_10/libtorrent-rasterbar-1.0.10.tar.gz"
-- 7z x libtorrent-rasterbar-1.0.10.tar.gz > nul
-- 7z x -olib libtorrent-rasterbar-1.0.10.tar > nul
-- move lib\libtorrent-rasterbar-1.0.10 lib\libtorrent
+- curl -fsSLO "https://github.com/arvidn/libtorrent/archive/libtorrent-1_1_4.zip"
+- 7z x -olib libtorrent-1_1_4.zip > nul
+- move lib\libtorrent-libtorrent-1_1_4 lib\libtorrent
+- curl -fsSLO "https://github.com/arvidn/libtorrent/commit/7eb3cf6bc6dbada3fa7bb7ff4d5981182813a0e2.patch"
+- patch -d lib\libtorrent -p1 <7eb3cf6bc6dbada3fa7bb7ff4d5981182813a0e2.patch
 
 - curl -fsSLO "https://sourceforge.net/projects/wtl/files/WTL 9.1/WTL 9.1.5321 Final/WTL91_5321_Final.zip"
 - 7z x -olib\wtl WTL91_5321_Final.zip > nul
 - mkdir C:\local
 - move lib\wtl\Include C:\local\include
 
-- curl -fsSLO "https://sourceforge.net/projects/boost/files/boost-binaries/1.63.0/boost_1_63_0-msvc-14.0-64.exe"
-- boost_1_63_0-msvc-14.0-64.exe /silent
-- move C:\local\boost_1_63_0\boost C:\local\include
-- move C:\local\boost_1_63_0\lib64-msvc-14.0 C:\local\lib64-msvc-14.0
+- curl -fsSLO "https://sourceforge.net/projects/boost/files/boost-binaries/1.65.1/boost_1_65_1-msvc-14.1-64.exe"
+- boost_1_65_1-msvc-14.1-64.exe /silent
+- move C:\local\boost_1_65_1\boost C:\local\include
+- move C:\local\boost_1_65_1\lib64-msvc-14.1 C:\local\lib64-msvc-14.1
 
-- curl -fsSLO "https://www.openssl.org/source/openssl-1.0.2j.tar.gz"
-- 7z x openssl-1.0.2j.tar.gz > nul
-- 7z x -olib openssl-1.0.2j.tar > nul
-- cd lib\openssl-1.0.2j
+- curl -fsSLO "https://www.openssl.org/source/openssl-1.0.2o.tar.gz"
+- 7z x openssl-1.0.2o.tar.gz > nul
+- 7z x -olib openssl-1.0.2o.tar > nul
+- cd lib\openssl-1.0.2o
 - perl Configure VC-WIN64A > nul
 - ms\do_win64a > nul
 - nmake -f ms\nt.mak > nul
-- copy out32\*.lib C:\local\lib64-msvc-14.0
+- copy out32\*.lib C:\local\lib64-msvc-14.1
 - move inc32\openssl C:\local\include
 - cd ..\..
 
